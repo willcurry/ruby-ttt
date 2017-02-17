@@ -20,18 +20,21 @@ class Board
     any_row_wins? || any_column_wins?
   end
 
+  private
+
   def any_column_wins?
-    seperate_rows.transpose.each do |column|
-      return true if !column.include?('-') && contains_same(column)
-    end
-    false
+    has_win?(seperate_rows.transpose)
   end
 
   def any_row_wins?
-    seperate_rows.each do |row|
-      return true if !row.include?('-') && contains_same(row)
+    has_win?(seperate_rows)
+  end
+
+  def has_win?(formation)
+    formation.each do |formation|
+      return true if !formation.include?('-') && contains_same(formation)
     end
-    false   
+    false
   end
   
   def seperate_rows

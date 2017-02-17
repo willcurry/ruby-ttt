@@ -6,16 +6,19 @@ class Game
     @turn = 'x'
   end
 
+
+  def make_move(position)
+    @board.mark(position, @turn)
+    rotate_turns
+  end
+
+  private
+
   def rotate_turns
     if @turn == 'x'
       @turn = 'o'
     else
       @turn = 'x'
     end
-  end
-
-  def make_move(position)
-    @board.mark(position, @turn)
-    rotate_turns
   end
 end
