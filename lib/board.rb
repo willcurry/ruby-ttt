@@ -13,7 +13,7 @@ class Board
   end
 
   def make_move(position)
-    @board[position] = @turn
+    @board[position] = @turn if @board[position] == '-'
     rotate_turns
   end
 

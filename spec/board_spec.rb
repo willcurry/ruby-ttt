@@ -40,4 +40,10 @@ RSpec.describe Board do
     board.make_move(3)
     expect(board.is_won).to eq(false)
   end
+
+  it "cannot make move at non empty position" do
+    board.make_move(3)
+    board.make_move(3)
+    expect(board.get[3]).to eq('x')
+  end
 end
