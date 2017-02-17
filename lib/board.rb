@@ -16,7 +16,7 @@ class Board
     @board[position] = player if @board[position] == '-'
   end
 
-  def is_won
+  def is_won?
     any_row_wins? || any_column_wins?
   end
 

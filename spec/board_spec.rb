@@ -16,18 +16,18 @@ RSpec.describe Board do
     board.mark(0, 'x')
     board.mark(1, 'x')
     board.mark(2, 'x')
-    expect(board.is_won).to eq(true)
+    expect(board.is_won?).to eq(true)
   end
 
   it "knows if board is won from column" do
     board.mark(0, 'x')
     board.mark(3, 'x')
     board.mark(6, 'x')   
-    expect(board.is_won).to eq(true)
+    expect(board.is_won?).to eq(true)
   end
 
   it "knows if game is not won" do
-    expect(board.is_won).to eq(false)
+    expect(board.is_won?).to eq(false)
   end
 
   it "cannot make move at non empty position" do

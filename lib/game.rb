@@ -6,10 +6,13 @@ class Game
     @turn = 'x'
   end
 
-
   def make_move(position)
     @board.mark(position, @turn)
     rotate_turns
+  end
+
+  def is_over?
+    @board.is_won? || !@board.include('-')
   end
 
   private
