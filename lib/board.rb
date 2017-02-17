@@ -1,6 +1,7 @@
 class Board
   def initialize
     @board = create_board
+    @turn = 'x'
   end
 
   def create_board
@@ -12,6 +13,12 @@ class Board
   end
 
   def make_move(position)
-    @board[position] = 'x'
+    @board[position] = @turn
+    rotate_turns
+  end
+
+  def rotate_turns
+    @turn = 'x' if @turn == 'o'
+    @turn = 'o' if @turn == 'x'
   end
 end
