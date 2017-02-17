@@ -12,17 +12,8 @@ class Board
     @board
   end
 
-  def make_move(position)
-    @board[position] = @turn if @board[position] == '-'
-    rotate_turns
-  end
-
-  def rotate_turns
-    if @turn == 'x' 
-      @turn = 'o'
-    else  
-      @turn = 'x'
-    end
+  def mark(position, player)
+    @board[position] = player if @board[position] == '-'
   end
 
   def is_won
