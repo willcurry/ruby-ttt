@@ -10,4 +10,8 @@ class Board
   def get
     @board
   end
+
+  def make_move(position)
+    @board[position] = 'x'
+  end
 end
