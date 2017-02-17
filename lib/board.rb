@@ -18,19 +18,36 @@ class Board
   end
 
   def rotate_turns
-    @turn = 'x' if @turn == 'o'
-    @turn = 'o' if @turn == 'x'
+    if @turn == 'x' 
+      @turn = 'o'
+    else  
+      @turn = 'x'
+    end
   end
 
   def is_won
-    rows = @board.each_slice(3).to_a
-    rows.each do |row|
-      return true if !row.include?('-') && contains_same(row)
+    any_row_wins? || any_column_wins?
+  end
+
+  def any_column_wins?
+    seperate_rows.transpose.each do |column|
+      return true if !column.include?('-') && contains_same(column)
     end
     false
   end
 
-def contains_same(row)
-    row.uniq.length != row.length
+  def any_row_wins?
+    seperate_rows.each do |row|
+      return true if !row.include?('-') && contains_same(row)
+    end
+    false   
+  end
+  
+  def seperate_rows
+    rows = @board.each_slice(3).to_a
+  end
+
+  def contains_same(row)
+    row.uniq.size <= 1
   end
 end
