@@ -26,6 +26,13 @@ RSpec.describe Board do
     expect(board.is_won?).to eq(true)
   end
 
+  it "knows if board is won from left diagonal" do
+    board.mark(0, 'x')
+    board.mark(4, 'x')
+    board.mark(8, 'x')   
+    expect(board.is_won?).to eq(true)
+  end
+
   it "knows if game is not won" do
     expect(board.is_won?).to eq(false)
   end

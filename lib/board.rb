@@ -18,7 +18,7 @@ class Board
   end
 
   def is_won?
-    any_row_wins? || any_column_wins?
+    any_row_wins? || any_column_wins? || any_diagonal_wins?
   end
 
   private
@@ -29,6 +29,21 @@ class Board
 
   def any_row_wins?
     has_win?(seperate_rows)
+  end
+
+  def left_diagonal_cells
+    cells = []
+    i = 0
+    while i < 3 do
+      cells << @board[i * 3 + i]
+      i += 1
+    end
+    cells
+  end
+
+  def any_diagonal_wins?
+    cells = left_diagonal_cells
+    !cells.include?('-') && contains_same(cells)
   end
 
   def has_win?(formation)
