@@ -31,6 +31,20 @@ class Board
     has_win?(seperate_rows)
   end
 
+  def any_diagonal_wins?
+    cells = []
+    cells << left_diagonal_cells
+    cells << right_diagonal_cells
+    has_win?(cells)
+  end
+
+  def has_win?(formation)
+    formation.each do |formation|
+      return true if !formation.include?('-') && contains_same(formation)
+    end
+    false
+  end
+
   def left_diagonal_cells
     cells = []
     i = 0
@@ -41,16 +55,14 @@ class Board
     cells
   end
 
-  def any_diagonal_wins?
-    cells = left_diagonal_cells
-    !cells.include?('-') && contains_same(cells)
-  end
-
-  def has_win?(formation)
-    formation.each do |formation|
-      return true if !formation.include?('-') && contains_same(formation)
+  def right_diagonal_cells
+    cells = []
+    i = 3
+    while i > 0 do
+      cells << @board[i * 3 - i]
+      i -= 1
     end
-    false
+    cells
   end
   
   def seperate_rows
