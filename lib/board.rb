@@ -21,6 +21,11 @@ class Board
     any_row_wins? || any_column_wins? || any_diagonal_wins?
   end
 
+  def has_draw?
+    empty_cells = @board.find {|cell| cell == '-'}
+    empty_cells.nil?
+  end
+
   private
 
   def any_column_wins?
@@ -32,9 +37,7 @@ class Board
   end
 
   def any_diagonal_wins?
-    cells = []
-    cells << left_diagonal_cells
-    cells << right_diagonal_cells
+    cells = [left_diagonal_cells, right_diagonal_cells]
     has_win?(cells)
   end
 

@@ -49,4 +49,18 @@ RSpec.describe Board do
     board.mark(1, 'o')
     expect(board.get[1]).to eq('x')
   end
+
+  it "knows if there is a draw" do
+    board.mark(0, 'x')
+    board.mark(1, 'o')
+    board.mark(2, 'o')
+    board.mark(3, 'o')
+    board.mark(4, 'x')
+    board.mark(5, 'x')
+    board.mark(6, 'x')
+    board.mark(7, 'o')
+    board.mark(8, 'o')
+    expect(board.is_won?).to eq(false)
+    expect(board.has_draw?).to eq(true)
+  end
 end
