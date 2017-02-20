@@ -63,4 +63,10 @@ RSpec.describe Board do
     expect(board.is_won?).to eq(false)
     expect(board.has_draw?).to eq(true)
   end
+
+  it "knows valid positions" do
+    expect(board.valid_position?(0)).to eq(true)
+    expect(board.valid_position?(-1)).to eq(false)
+    expect(board.valid_position?(9)).to eq(false)
+  end
 end

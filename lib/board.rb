@@ -26,6 +26,10 @@ class Board
     empty_cells.nil?
   end
 
+  def valid_position?(position)
+    position < 9 && position >= 0 && @board[position] == '-'
+  end
+
   private
 
   def any_column_wins?
@@ -73,4 +77,5 @@ class Board
   def contains_same(row)
     row.uniq.size <= 1
   end
+
 end
