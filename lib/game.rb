@@ -7,7 +7,7 @@ class Game
   end
 
   def make_move(position)
-    @board.mark(position, @turn)
+    @board = @board.mark(position, @turn)
     rotate_turns
   end
 

@@ -14,6 +14,7 @@ class Board
 
   def mark(position, player)
     @board[position] = player if @board[position] == '-'
+    self
   end
 
   def is_won?
