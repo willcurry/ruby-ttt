@@ -2,7 +2,9 @@ require 'game'
 
 RSpec.describe Game do
   let (:board) {Board.new}
-  let (:game) {Game.new(board)}
+  let (:player_one) {HumanPlayer.new('x')}
+  let (:player_two) {HumanPlayer.new('o')}
+  let (:game) {Game.new(board, player_one, player_two)}
 
   it "knows whos turn it is" do
     game.make_move(0)

@@ -1,13 +1,14 @@
 require_relative 'board'
 
 class Game
-  def initialize(board)
+  def initialize(board, player_one, player_two)
     @board = board
-    @turn = 'x'
+    @player_one = player_one
+    @player_two = player_two
   end
 
   def make_move(position)
-    @board = @board.mark(position, @turn)
+    @board = @board.mark(position, @player_one.mark)
     rotate_turns
   end
 
@@ -29,11 +30,9 @@ class Game
   end
 
   def rotate_turns
-    if @turn == 'x'
-      @turn = 'o'
-    else
-      @turn = 'x'
-    end
+    temp = @player_one
+    @player_one = @player_two
+    @player_two = temp
   end
 end
 
