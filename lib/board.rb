@@ -34,6 +34,16 @@ class Board
     position < 9 && position >= 0 && @board[position] == '-'
   end
 
+  def available_positions
+    i = 0
+    positions = []
+    while i < 9 do
+      positions << i if @board[i] == '-'
+      i += 1
+    end
+    positions
+  end
+
   private
 
   def any_column_wins?
@@ -81,5 +91,4 @@ class Board
   def contains_same(row)
     row.uniq.size <= 1
   end
-
 end

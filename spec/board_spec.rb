@@ -51,15 +51,7 @@ RSpec.describe Board do
   end
 
   it "knows if there is a draw" do
-    board.mark(0, 'x')
-    board.mark(1, 'o')
-    board.mark(2, 'o')
-    board.mark(3, 'o')
-    board.mark(4, 'x')
-    board.mark(5, 'x')
-    board.mark(6, 'x')
-    board.mark(7, 'o')
-    board.mark(8, 'o')
+    board = Board.new(['x', 'o', 'o', 'o', 'x', 'x', 'x', 'o', 'o'])
     expect(board.is_won?).to eq(false)
     expect(board.has_draw?).to eq(true)
   end
@@ -68,5 +60,10 @@ RSpec.describe Board do
     expect(board.valid_position?(0)).to eq(true)
     expect(board.valid_position?(-1)).to eq(false)
     expect(board.valid_position?(9)).to eq(false)
+  end
+
+  it "knows available positions" do
+    board.mark(7, 'o')
+    expect(board.available_positions).to eq([0, 1, 2, 3, 4, 5, 6, 8])
   end
 end
