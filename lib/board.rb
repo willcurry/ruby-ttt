@@ -1,6 +1,10 @@
 class Board
-  def initialize
-    @board = create_board
+  def initialize(cells = [])
+    if cells.empty?
+      @board = create_board
+    else
+      @board = cells
+    end
     @turn = 'x'
   end
 
@@ -14,7 +18,7 @@ class Board
 
   def mark(position, player)
     @board[position] = player if @board[position] == '-'
-    self
+    Board.new(@board)
   end
 
   def is_won?

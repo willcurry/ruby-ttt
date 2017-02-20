@@ -15,7 +15,7 @@ RSpec.describe Game do
     @game.make_move
     @writer.puts(2)
     @game.make_move
-    expect(board.get[1]).to eq('o')
+    expect(@game.board[1]).to eq('o')
   end
 
   it "knows if the game is over" do
@@ -30,5 +30,4 @@ RSpec.describe Game do
     @game.make_move
     expect(board.get[0]).to eq('x')
   end
-
 end

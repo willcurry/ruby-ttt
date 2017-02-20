@@ -31,12 +31,17 @@ class Game
       make_move
     end
     display_board
+    display_winner
   end
 
   private
 
   def display_board
     @board.get.each_slice(3).to_a.each {|row| puts row.join(' ')}
+  end
+
+  def display_winner
+    puts @player_two.mark + " has won the game!"
   end
 
   def rotate_turns
