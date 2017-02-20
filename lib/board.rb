@@ -39,10 +39,8 @@ class Board
   end
 
   def has_win?(formation)
-    formation.each do |formation|
-      return true if !formation.include?('-') && contains_same(formation)
-    end
-    false
+    win = formation.find {|formation| !formation.include?('-') && contains_same(formation)}
+    !win.nil?
   end
 
   def left_diagonal_cells
