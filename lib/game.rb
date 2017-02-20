@@ -8,8 +8,12 @@ class Game
   end
 
   def make_move(position)
-    @board = @board.mark(position, @player_one.mark)
-    rotate_turns
+    if is_valid_position?(position) then
+      @board = @board.mark(position - 1, @player_one.mark)
+      rotate_turns
+    else
+      puts("Invalid position!")
+    end
   end
 
   def is_over?
@@ -21,12 +25,17 @@ class Game
       display_board
       make_move(gets.to_i)
     end
+    display_board
   end
 
   private
 
+  def is_valid_position?(position)
+    position < 9 and position > 0 and @board.get[position] == '-'
+  end
+
   def display_board
-    puts @board.get
+    @board.get.each_slice(3).to_a.each {|row| puts row.join(' ')}
   end
 
   def rotate_turns
