@@ -12,7 +12,7 @@ class Game
   end
 
   def make_move
-    move = @player_one.next_move - 1 
+    move = @player_one.next_move(@board) - 1 
     if @board.valid_position?(move)
       @board = @board.mark(move, @player_one.mark)
       rotate_turns

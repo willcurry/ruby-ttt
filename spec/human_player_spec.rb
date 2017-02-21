@@ -12,6 +12,6 @@ RSpec.describe HumanPlayer do
 
   it "knows its next move" do
     @writer.puts("1")
-    expect(@human.next_move).to eq(1)
+    expect(@human.next_move("")).to eq(1)
   end
 end

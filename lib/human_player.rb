@@ -8,7 +8,7 @@ class HumanPlayer
     @mark
   end
 
-  def next_move
+  def next_move(board)
     @input.gets.to_i
   end
 end

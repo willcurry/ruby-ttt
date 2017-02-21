@@ -1,6 +1,4 @@
 class Board
-  attr_reader :last_move
-
   def initialize(cells = [], last_move = 'o')
     if cells.empty?
       @board = create_board
@@ -20,8 +18,13 @@ class Board
   end
 
   def mark(position, player)
-    @board[position] = player 
-    Board.new(@board, player)
+    cells = @board.dup
+    cells[position] = player 
+    Board.new(cells, player)
+  end
+
+  def winner
+    @last_move
   end
 
   def is_won?
@@ -31,6 +34,10 @@ class Board
   def has_draw?
     empty_cells = @board.find {|cell| cell == '-'}
     empty_cells.nil?
+  end
+
+  def is_over?
+    is_won? || has_draw?
   end
 
   def valid_position?(position)

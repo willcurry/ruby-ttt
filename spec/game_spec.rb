@@ -19,15 +19,16 @@ RSpec.describe Game do
   end
 
   it "knows if the game is over" do
-    board.mark(0, 'x')
-    board.mark(1, 'x')
-    board.mark(2, 'x')
-    expect(@game.is_over?).to eq(true)
+    board = Board.new(['x', 'x', 'x', '-', '-', '-', '-', '-', '-'])
+    player_one = HumanPlayer.new('x')
+    player_two = HumanPlayer.new('o')
+    game = Game.new(board, player_one, player_two)
+    expect(game.is_over?).to eq(true)
   end
 
   it "decreases the position by one" do
     @writer.puts(1)
     @game.make_move
-    expect(board.get[0]).to eq('x')
+    expect(@game.board[0]).to eq('x')
   end
 end
