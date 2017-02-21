@@ -1,11 +1,14 @@
 class Board
-  def initialize(cells = [])
+  attr_reader :last_move
+
+  def initialize(cells = [], last_move = 'o')
     if cells.empty?
       @board = create_board
     else
       @board = cells
     end
     @turn = 'x'
+    @last_move = last_move
   end
 
   def create_board
@@ -17,8 +20,8 @@ class Board
   end
 
   def mark(position, player)
-    @board[position] = player if @board[position] == '-'
-    Board.new(@board)
+    @board[position] = player 
+    Board.new(@board, player)
   end
 
   def is_won?
