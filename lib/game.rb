@@ -5,7 +5,7 @@ class Game
     @board = board
     @player_one = player_one
     @player_two = player_two
-    @game_type = ConsoleGame.new
+    @game_type = game_type
   end
 
   def board
