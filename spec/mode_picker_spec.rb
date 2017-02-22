@@ -17,4 +17,10 @@ RSpec.describe ModePicker do
     @input.rewind
     expect(@mode_picker.request_mode).to be_a(HumanVsComputer)
   end
+
+  it "returns a ComputerVsComputer mode if the input is 3" do
+    @input.puts("3")
+    @input.rewind
+    expect(@mode_picker.request_mode).to be_a(ComputerVsComputer)
+  end
 end
