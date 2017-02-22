@@ -18,7 +18,7 @@ class Game
       @board = @board.mark(move, @player_one.mark)
       rotate_turns
     else
-      puts "Invalid position!"
+      @game_type.display_invalid_move
     end
   end
 

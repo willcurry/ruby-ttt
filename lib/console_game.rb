@@ -11,6 +11,10 @@ class ConsoleGame
     print(player.mark + " has won the game!")
   end
 
+  def display_invalid_move
+    print("Invalid move!")
+  end
+
   private 
 
   def print(string)

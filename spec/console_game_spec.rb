@@ -18,4 +18,9 @@ RSpec.describe ConsoleGame do
     @console_game.display_winner(HumanPlayer.new('o'))
     expect(@output.string).to include("o has won the game!")
   end
+
+  it "displays invalid move correctly" do
+    @console_game.display_invalid_move
+    expect(@output.string).to include("Invalid move!")
+  end
 end
