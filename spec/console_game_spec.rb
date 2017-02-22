@@ -1,6 +1,7 @@
 require 'console_game'
 require 'board'
 require 'game'
+require 'human_vs_human'
 
 RSpec.describe ConsoleGame do
   before (:each) do
@@ -22,5 +23,11 @@ RSpec.describe ConsoleGame do
   it "displays invalid move correctly" do
     @console_game.display_invalid_move
     expect(@output.string).to include("Invalid move!")
+  end
+
+  it "displays all the modes correctly" do
+    modes = [HumanVsHuman.new(1, "Human VS Human")]
+    @console_game.display_modes(modes)
+    expect(@output.string).to include("1) Human VS Human")
   end
 end

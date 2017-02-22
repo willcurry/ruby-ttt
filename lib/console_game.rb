@@ -15,6 +15,10 @@ class ConsoleGame
     print("Invalid move!")
   end
 
+  def display_modes(modes)
+    modes.all? {|mode| print("#{mode.key}) #{mode.name}")}
+  end
+
   private 
 
   def print(string)

@@ -1,8 +1,13 @@
 require 'human_player'
 
 class HumanVsHuman
-  def initialize(key)
+  def initialize(key, name)
     @key = key
+    @name = name
+  end
+
+  def name
+    @name
   end
 
   def key

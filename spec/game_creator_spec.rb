@@ -6,7 +6,7 @@ RSpec.describe GameCreator do
     @game_creator = GameCreator.new(@input)
   end
 
-  it "creates a  game" do
+  it "creates a game" do
     @input.puts("1")
     @input.rewind
     expect(@game_creator.create).to be_a(Game)

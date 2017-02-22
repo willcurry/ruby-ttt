@@ -2,8 +2,13 @@ require 'human_player'
 require 'computer_player'
 
 class HumanVsComputer
-  def initialize(key)
+  def initialize(key, name)
     @key = key
+    @name = name
+  end
+
+  def name
+    @name
   end
 
   def key
