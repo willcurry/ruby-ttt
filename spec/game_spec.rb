@@ -4,18 +4,18 @@ RSpec.describe Game do
   let (:board) {Board.new}
 
   before(:each) do
-    reader, @writer = IO.pipe
-    @player_one = HumanPlayer.new('x', reader)
-    @player_two = HumanPlayer.new('o', reader)
+    @input = StringIO.new
+    @player_one = HumanPlayer.new('x', @input)
+    @player_two = HumanPlayer.new('o', @input)
     @game = Game.new(board, @player_one, @player_two)
   end
 
   it "knows whos turn it is" do
-    @writer.puts(1)
+    @input.puts("1\n1")
+    @input.rewind
     @game.make_move
-    @writer.puts(2)
     @game.make_move
-    expect(@game.board[1]).to eq('o')
+    expect(@game.board[0]).to eq('x')
   end
 
   it "knows if the game is over" do
@@ -27,7 +27,8 @@ RSpec.describe Game do
   end
 
   it "decreases the position by one" do
-    @writer.puts(1)
+    @input.puts("1")
+    @input.rewind
     @game.make_move
     expect(@game.board[0]).to eq('x')
   end

@@ -2,8 +2,8 @@ require 'human_player'
 
 RSpec.describe HumanPlayer do
   before(:each) do
-    reader, @writer = IO.pipe
-    @human = HumanPlayer.new('x', reader)
+    @input = StringIO.new
+    @human = HumanPlayer.new('x', @input)
   end
 
   it "knows its mark" do
@@ -11,7 +11,8 @@ RSpec.describe HumanPlayer do
   end
 
   it "knows its next move" do
-    @writer.puts("1")
+    @input.puts("1")
+    @input.rewind
     expect(@human.next_move("")).to eq(1)
   end
 end

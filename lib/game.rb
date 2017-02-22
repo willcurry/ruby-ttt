@@ -50,4 +50,3 @@ class Game
     @player_two = temp
   end
 end
-

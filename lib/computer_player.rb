@@ -1,7 +1,6 @@
 class ComputerPlayer
   def initialize(mark)
     @mark = mark
-    @current_best_move = -1
   end
 
   def mark
@@ -38,7 +37,7 @@ class ComputerPlayer
 
   def minimax(depth, board, player)
     best_score = new_score(player)
-    best_move = @current_best_move
+    best_move = -1
     if board.is_over? || depth == 0
       return [score(board, depth), best_move]
     end
