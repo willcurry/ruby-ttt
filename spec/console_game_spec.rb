@@ -13,4 +13,9 @@ RSpec.describe ConsoleGame do
     @console_game.display_board(@board.get)
     expect(@output.string).to include("x x -\n- - -\n- - -")
   end
+
+  it "displays the winner correctly" do
+    @console_game.display_winner(HumanPlayer.new('o'))
+    expect(@output.string).to include("o has won the game!")
+  end
 end

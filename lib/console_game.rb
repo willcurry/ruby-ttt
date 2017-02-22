@@ -7,6 +7,10 @@ class ConsoleGame
     board.each_slice(3).to_a.each {|row| print(row.join(' ')) }
   end
 
+  def display_winner(player)
+    print(player.mark + " has won the game!")
+  end
+
   private 
 
   def print(string)

@@ -31,15 +31,11 @@ class Game
       @game_type.display_board(@board.get)
       make_move
     end
-    display_board
-    display_winner
+    @game_type.display_board(@board.get)
+    @game_type.display_winner(@player_two)
   end
 
   private
-
-  def display_winner
-    puts @player_two.mark + " has won the game!"
-  end
 
   def rotate_turns
     temp = @player_one
