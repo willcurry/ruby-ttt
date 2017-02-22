@@ -1,12 +1,10 @@
 class ConsoleGame
-  def initialize(game, output = $stdout)
-    @game = game
-    @board = @game.board
+  def initialize(output = $stdout)
     @output = output
   end
 
-  def display_board
-    @board.each_slice(3).to_a.each {|row| print(row.join(' ')) }
+  def display_board(board)
+    board.each_slice(3).to_a.each {|row| print(row.join(' ')) }
   end
 
   private 
