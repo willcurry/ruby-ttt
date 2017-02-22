@@ -1,10 +1,11 @@
 require_relative 'board'
 
 class Game
-  def initialize(board, player_one, player_two)
+  def initialize(board, player_one, player_two, game_type = ConsoleGame.new)
     @board = board
     @player_one = player_one
     @player_two = player_two
+    @game_type = ConsoleGame.new
   end
 
   def board
@@ -27,7 +28,7 @@ class Game
 
   def start
     until is_over?
-      display_board
+      @game_type.display_board(@board.get)
       make_move
     end
     display_board
@@ -35,10 +36,6 @@ class Game
   end
 
   private
-
-  def display_board
-    @board.get.each_slice(3).to_a.each {|row| puts row.join(' ')}
-  end
 
   def display_winner
     puts @player_two.mark + " has won the game!"
