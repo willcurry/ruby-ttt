@@ -1,10 +1,11 @@
-require 'human_player'
 require 'human_vs_human'
+require 'human_vs_computer'
 
 class ModePicker
   def initialize(input = $stdin)
     @input = input
-    @modes = [HumanVsHuman.new(1)]
+    @modes = [HumanVsHuman.new(1),
+              HumanVsComputer.new(2)]
   end
 
   def request_mode
