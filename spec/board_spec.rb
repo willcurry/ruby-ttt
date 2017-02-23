@@ -8,7 +8,7 @@ RSpec.describe Board do
   end
 
   it "creates a board with the given size" do
-    board = Board.new([], 'o', 16)
+    board = Board.new([], 'o', 4)
     expect(board.get.size).to eq(16)
   end
 

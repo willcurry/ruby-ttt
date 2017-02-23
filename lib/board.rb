@@ -1,6 +1,8 @@
 class Board
-  def initialize(cells = [], last_move = 'o', cell_count = 9)
-    @board = cells.empty? ? create_board(cell_count) : cells
+  def initialize(cells = [], last_move = 'o', size = 3)
+    @size = size
+    @cell_count = size * size
+    @board = cells.empty? ? create_board(@cell_count) : cells
     @last_move = last_move
   end
 
@@ -38,13 +40,13 @@ class Board
   end
 
   def valid_position?(position)
-    position < 9 && position >= 0 && @board[position] == '-'
+    position < @cell_count && position >= 0 && @board[position] == '-'
   end
 
   def available_positions
     i = 0
     positions = []
-    while i < 9 do
+    while i < @cell_count do
       positions << i if @board[i] == '-'
       i += 1
     end
@@ -73,8 +75,8 @@ class Board
   def left_diagonal_cells
     cells = []
     i = 0
-    while i < 3 do
-      cells << @board[i * 3 + i]
+    while i < @size do
+      cells << @board[i * @size + i]
       i += 1
     end
     cells
@@ -82,16 +84,16 @@ class Board
 
   def right_diagonal_cells
     cells = []
-    i = 3
+    i = @size
     while i > 0 do
-      cells << @board[i * 3 - i]
+      cells << @board[i * @size - i]
       i -= 1
     end
     cells
   end
   
   def seperate_rows
-    rows = @board.each_slice(3).to_a
+    rows = @board.each_slice(@size).to_a
   end
 
   def contains_same(row)
