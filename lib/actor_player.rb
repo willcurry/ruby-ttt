@@ -10,16 +10,13 @@ class ActorPlayer
   end
 
   def next_move(board)
-    @input.gets.to_i
+     @input.gets.to_i
   end
 
   private
   
   def prepare_moves(moves_to_make)
-    moves = ""
-    moves_to_make.each do |move|
-      moves = moves + (move + "\n")
-    end
+    moves = moves_to_make.join("\n")
     @input.puts(moves)
     @input.rewind
   end
