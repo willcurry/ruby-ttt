@@ -6,6 +6,7 @@ class GameCreator
   def initialize(input = $stdin, game_type = ConsoleGame.new)
     @input = input
     @mode_picker = ModePicker.new(game_type)
+    @game_type = game_type
   end
 
   def create

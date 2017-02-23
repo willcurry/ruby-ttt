@@ -1,7 +1,6 @@
 class Board
   def initialize(cells = [], last_move = 'o')
     @board = cells.empty? ? create_board : cells
-    @turn = 'x'
     @last_move = last_move
   end
 

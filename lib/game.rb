@@ -1,4 +1,4 @@
-require_relative 'board'
+require 'board'
 
 class Game
   def initialize(board, player_one, player_two, game_type = ConsoleGame.new)
@@ -31,7 +31,6 @@ class Game
       @game_type.display_board(@board.get)
       make_move
     end
-    @game_type.display_board(@board.get)
     @game_type.display_winner(@player_two)
   end
 
