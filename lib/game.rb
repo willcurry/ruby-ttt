@@ -31,6 +31,7 @@ class Game
       @game_type.display_board(@board.get)
       make_move
     end
+    @game_type.display_board(@board.get)
     @game_type.display_winner(@player_two)
   end
 

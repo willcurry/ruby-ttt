@@ -1,4 +1,4 @@
-class GameRecord
+class GameRecording
   def initialize
     @moves = []
   end
