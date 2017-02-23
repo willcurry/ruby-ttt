@@ -26,7 +26,7 @@ RSpec.describe ConsoleGame do
   end
 
   it "displays all the modes correctly" do
-    modes = [HumanVsHuman.new(1, "Human VS Human")]
+    modes = [Modes::HumanVsHuman.new]
     @console_game.display_modes(modes)
     expect(@output.string).to include("1) Human VS Human")
   end

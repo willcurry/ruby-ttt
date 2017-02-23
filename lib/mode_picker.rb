@@ -6,12 +6,24 @@ require 'console_game'
 class ModePicker
   def initialize(game_type = ConsoleGame.new)
     @game_type = game_type
-    @modes = [HumanVsHuman.new(1, "Human VS Human"),
-              HumanVsComputer.new(2, "Human VS Computer"),
-              ComputerVsComputer.new(3, "Computer VS Computer")]
+    @modes = find_modes
   end
 
   def request_mode(requested_key)
     mode = @modes.find {|mode| mode.key == requested_key}
+  end
+
+  private
+
+  def find_modes
+    modes = []
+    Modes.constants.each do |mode|
+      modes << get_class(mode)
+    end
+    modes
+  end
+
+  def get_class(mode)
+    Object.const_get("Modes::#{mode}").new
   end
 end
