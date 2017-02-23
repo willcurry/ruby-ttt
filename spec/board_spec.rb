@@ -17,6 +17,30 @@ RSpec.describe Board do
     expect(new_board.get[0]).to eq('x')
   end
 
+  it "knows if board is won from row 4x4" do
+    board = Board.new(['x', 'x', 'x', 'x', 
+                       '-', '-', '-', '-',
+                       '-', '-', '-', '-',
+                       '-', '-', '-', '-'], 'o', 4)
+    expect(board.is_won?).to eq(true)
+  end
+
+  it "knows if board is won from column 4x4" do
+    board = Board.new(['x', '-', '-', '-', 
+                       'x', '-', '-', '-',
+                       'x', '-', '-', '-',
+                       'x', '-', '-', '-'], 'o', 4)
+    expect(board.is_won?).to eq(true)
+  end
+
+  it "knows if board is won from diagonal" do
+    board = Board.new(['x', '-', '-', '-', 
+                       '-', 'x', '-', '-',
+                       '-', '-', 'x', '-',
+                       '-', '-', '-', 'x'], 'o', 4)
+    expect(board.is_won?).to eq(true)
+  end
+
   it "knows if board is won from row" do
     board = Board.new(['x', 'x', 'x', '-', '-', '-', '-', '-', '-'])
     expect(board.is_won?).to eq(true)
