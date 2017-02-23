@@ -13,8 +13,6 @@ class ModePicker
     mode = @modes.find {|mode| mode.key == requested_key}
   end
 
-  private
-
   def find_modes
     modes = []
     Modes.constants.each do |mode|
@@ -22,6 +20,8 @@ class ModePicker
     end
     modes
   end
+  
+  private
 
   def get_class(mode)
     Object.const_get("Modes::#{mode}").new

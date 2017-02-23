@@ -10,9 +10,10 @@ RSpec.describe HumanPlayer do
     expect(@human.mark).to eq('x')
   end
 
-  it "knows its next move" do
+
+  it "decreases its next move" do
     @input.puts("1")
     @input.rewind
-    expect(@human.next_move("")).to eq(1)
+    expect(@human.next_move("")).to eq(0)
   end
 end

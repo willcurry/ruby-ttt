@@ -4,13 +4,13 @@ RSpec.describe ComputerPlayer do
   it "goes for the win on a row 3x3" do
     board = Board.new(['-', '-', '-', 'x', 'x', '-', '-', '-', '-'])
     computer = ComputerPlayer.new('x')
-    expect(computer.next_move(board)).to eq(6)
+    expect(computer.next_move(board)).to eq(5)
   end
 
   it "blocks the win on a row 3x3" do
     board = Board.new(['-', '-', '-', 'o', 'o', '-', '-', '-', '-'])
     computer = ComputerPlayer.new('x')
-    expect(computer.next_move(board)).to eq(6)
+    expect(computer.next_move(board)).to eq(5)
   end
 
   it "goes for the win on a column 3x3" do
@@ -18,7 +18,7 @@ RSpec.describe ComputerPlayer do
                        'x', '-', '-', 
                        '-', '-', '-'])
     computer = ComputerPlayer.new('x')
-    expect(computer.next_move(board)).to eq(7)
+    expect(computer.next_move(board)).to eq(6)
   end
 
   it "blocks the win on a column 3x3" do
@@ -26,7 +26,7 @@ RSpec.describe ComputerPlayer do
                        'o', 'x', '-',
                        '-', '-', '-'])
     computer = ComputerPlayer.new('x')
-    expect(computer.next_move(board)).to eq(7)
+    expect(computer.next_move(board)).to eq(6)
   end
 
   it "goes for the win on a diagonal 3x3" do
@@ -34,7 +34,7 @@ RSpec.describe ComputerPlayer do
                        '-', 'x', '-', 
                        '-', '-', '-'])
     computer = ComputerPlayer.new('x')
-    expect(computer.next_move(board)).to eq(9)
+    expect(computer.next_move(board)).to eq(8)
   end
 
   it "blocks the win on a diagonal 3x3" do
@@ -42,6 +42,6 @@ RSpec.describe ComputerPlayer do
                        '-', 'o', '-',
                        '-', '-', '-'])
     computer = ComputerPlayer.new('x')
-    expect(computer.next_move(board)).to eq(9)
+    expect(computer.next_move(board)).to eq(8)
   end
 end

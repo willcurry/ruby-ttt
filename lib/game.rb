@@ -1,4 +1,5 @@
 require 'board'
+require 'game_recording'
 
 class Game
   def initialize(board, player_one, player_two, game_type = ConsoleGame.new)
@@ -6,6 +7,7 @@ class Game
     @player_one = player_one
     @player_two = player_two
     @game_type = game_type
+    @game_recording = GameRecording.new(game_type)
   end
 
   def board
@@ -13,8 +15,9 @@ class Game
   end
 
   def make_move
-    move = @player_one.next_move(@board) - 1 
+    move = @player_one.next_move(@board)
     if @board.valid_position?(move)
+      @game_recording.move(move, @player_one.mark)
       @board = @board.mark(move, @player_one.mark)
       rotate_turns
     else
@@ -28,11 +31,14 @@ class Game
 
   def start
     until is_over?
-      @game_type.display_board(@board.get)
+      @game_type.display_board(board)
       make_move
     end
-    @game_type.display_board(@board.get)
-    @game_type.display_winner(@player_two)
+    @game_type.game_over(@board)
+  end
+
+  def recording
+    @game_recording
   end
 
   private

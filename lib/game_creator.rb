@@ -10,6 +10,7 @@ class GameCreator
   end
 
   def create
+    @game_type.display_modes(@mode_picker.find_modes)
     players = requested_mode.players
     Game.new(Board.new, players[0], players[1])
   end

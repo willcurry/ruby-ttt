@@ -8,7 +8,7 @@ class ComputerPlayer
   end
 
   def next_move(board)
-    minimax(8, board, @mark)[1] + 1
+    minimax(8, board, @mark)[1]
   end
 
   private

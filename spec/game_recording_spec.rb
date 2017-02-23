@@ -18,11 +18,13 @@ RSpec.describe GameRecording do
   end
 
   it "plays the game correctly" do
-    @game_recording.move(3, 'x')
-    @game_recording.move(4, 'o')
+    @game_recording.move(0, 'x')
+    @game_recording.move(1, 'o')
     @game_recording.move(2, 'x')
+    @game_recording.move(3, 'o')
+    @game_recording.move(4, 'x')
     @game_recording.move(5, 'o')
-    @game_recording.move(1, 'x')
+    @game_recording.move(6, 'x')
     @game_recording.play
     expect(@output.string).to include("x has won the game!")
   end

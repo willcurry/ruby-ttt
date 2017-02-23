@@ -16,8 +16,14 @@ RSpec.describe ConsoleGame do
   end
 
   it "displays the winner correctly" do
-    @console_game.display_winner(HumanPlayer.new('o'))
+    board = Board.new(['x', 'x', 'x', '-', '-', '-', '-', '-', '-'])
+    @console_game.game_over(board)
     expect(@output.string).to include("o has won the game!")
+  end
+
+  it "displays if the game is a draw" do
+    @console_game.game_over(@board)
+    expect(@output.string).to include("The game is a draw!")
   end
 
   it "displays invalid move correctly" do

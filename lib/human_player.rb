@@ -9,6 +9,6 @@ class HumanPlayer
   end
 
   def next_move(board)
-    @input.gets.to_i
+    @input.gets.to_i - 1
   end
 end
