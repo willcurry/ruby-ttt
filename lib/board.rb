@@ -1,7 +1,7 @@
 class Board
-  def initialize
-    @board = create_board
-    @turn = 'x'
+  def initialize(cells = [], last_move = 'o')
+    @board = cells.empty? ? create_board : cells
+    @last_move = last_move
   end
 
   def create_board
@@ -12,35 +12,81 @@ class Board
     @board
   end
 
-  def make_move(position)
-    @board[position] = @turn if @board[position] == '-'
-    rotate_turns
+  def mark(position, player)
+    cells = @board.dup
+    cells[position] = player 
+    Board.new(cells, player)
   end
 
-  def rotate_turns
-    if @turn == 'x' 
-      @turn = 'o'
-    else  
-      @turn = 'x'
+  def winner
+    @last_move
+  end
+
+  def is_won?
+    any_row_wins? || any_column_wins? || any_diagonal_wins?
+  end
+
+  def has_draw?
+    empty_cells = @board.find {|cell| cell == '-'}
+    empty_cells.nil?
+  end
+
+  def is_over?
+    is_won? || has_draw?
+  end
+
+  def valid_position?(position)
+    position < 9 && position >= 0 && @board[position] == '-'
+  end
+
+  def available_positions
+    i = 0
+    positions = []
+    while i < 9 do
+      positions << i if @board[i] == '-'
+      i += 1
     end
+    positions
   end
 
-  def is_won
-    any_row_wins? || any_column_wins?
-  end
+  private
 
   def any_column_wins?
-    seperate_rows.transpose.each do |column|
-      return true if !column.include?('-') && contains_same(column)
-    end
-    false
+    has_win?(seperate_rows.transpose)
   end
 
   def any_row_wins?
-    seperate_rows.each do |row|
-      return true if !row.include?('-') && contains_same(row)
+    has_win?(seperate_rows)
+  end
+
+  def any_diagonal_wins?
+    cells = [left_diagonal_cells, right_diagonal_cells]
+    has_win?(cells)
+  end
+
+  def has_win?(formation)
+    win = formation.find {|formation| !formation.include?('-') && contains_same(formation)}
+    !win.nil?
+  end
+
+  def left_diagonal_cells
+    cells = []
+    i = 0
+    while i < 3 do
+      cells << @board[i * 3 + i]
+      i += 1
     end
-    false   
+    cells
+  end
+
+  def right_diagonal_cells
+    cells = []
+    i = 3
+    while i > 0 do
+      cells << @board[i * 3 - i]
+      i -= 1
+    end
+    cells
   end
   
   def seperate_rows
