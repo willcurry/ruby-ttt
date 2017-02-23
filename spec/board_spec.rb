@@ -7,6 +7,11 @@ RSpec.describe Board do
     expect(board.get.size).to eq(9)
   end
 
+  it "creates a board with the given size" do
+    board = Board.new([], 'o', 16)
+    expect(board.get.size).to eq(16)
+  end
+
   it "makes move in correct place" do
     new_board = board.mark(0, 'x')
     expect(new_board.get[0]).to eq('x')

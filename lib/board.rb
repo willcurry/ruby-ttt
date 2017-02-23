@@ -1,11 +1,13 @@
 class Board
-  def initialize(cells = [], last_move = 'o')
-    @board = cells.empty? ? create_board : cells
+  def initialize(cells = [], last_move = 'o', cell_count = 9)
+    @board = cells.empty? ? create_board(cell_count) : cells
     @last_move = last_move
   end
 
-  def create_board
-    ['-', '-', '-', '-', '-', '-', '-', '-', '-']
+  def create_board(cell_count)
+    cells = []
+    cell_count.times {cells << '-'}
+    cells
   end
 
   def get
@@ -60,8 +62,7 @@ class Board
   end
 
   def any_diagonal_wins?
-    cells = [left_diagonal_cells, right_diagonal_cells]
-    has_win?(cells)
+    has_win?([left_diagonal_cells, right_diagonal_cells])
   end
 
   def has_win?(formation)
