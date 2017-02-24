@@ -9,7 +9,7 @@ class Game
     @player_one = player_one
     @player_two = player_two
     @game_type = game_type
-    @game_recording = GameRecording.new(game_type)
+    @game_recording = GameRecording.new(game_type, @board.dimension)
   end
 
   def make_move
