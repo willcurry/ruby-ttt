@@ -7,6 +7,5 @@ console = ConsoleGame.new
 game_creator = GameCreator.new($stdin, console)
 game = game_creator.create
 game.start
-recording = game.recording
-puts "----"
-recording.play
+puts "playing recording...."
+game.recording.play

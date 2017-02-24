@@ -10,6 +10,7 @@ class GameCreator
   end
 
   def create
+    @game_type.ask_for_board_size
     board_size = @input.gets.to_i
     @game_type.display_modes(@mode_picker.find_modes)
     players = requested_mode.players
