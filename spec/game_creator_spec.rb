@@ -7,7 +7,7 @@ RSpec.describe GameCreator do
   end
 
   it "creates a game" do
-    @input.puts("1")
+    @input.puts("1\n1")
     @input.rewind
     expect(@game_creator.create).to be_a(Game)
   end

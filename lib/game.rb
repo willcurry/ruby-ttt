@@ -2,16 +2,14 @@ require 'board'
 require 'game_recording'
 
 class Game
+  attr_reader :board
+  
   def initialize(board, player_one, player_two, game_type = ConsoleGame.new)
     @board = board
     @player_one = player_one
     @player_two = player_two
     @game_type = game_type
-    @game_recording = GameRecording.new(game_type)
-  end
-
-  def board
-    @board.get
+    @game_recording = GameRecording.new(game_type, @board.dimension)
   end
 
   def make_move
@@ -31,7 +29,7 @@ class Game
 
   def start
     until is_over?
-      @game_type.display_board(board)
+      @game_type.display_board(@board)
       make_move
     end
     @game_type.game_over(@board)

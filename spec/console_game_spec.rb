@@ -11,7 +11,7 @@ RSpec.describe ConsoleGame do
   end
 
   it "displays board correctly" do
-    @console_game.display_board(@board.get)
+    @console_game.display_board(@board)
     expect(@output.string).to include("x x -\n- - -\n- - -")
   end
 
