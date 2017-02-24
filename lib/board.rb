@@ -1,9 +1,23 @@
 class Board
-  def initialize(cells = [], last_move = 'o', size = 3)
-    @size = size
-    @cell_count = size * size
-    @board = cells.empty? ? create_board(@cell_count) : cells
+  attr_reader :dimension
+  attr_reader :cells
+
+  def initialize(cells = [], last_move = 'o', dimension = 3)
+    cells.empty? ? setup_new_game(dimension) : continue_game(cells)
     @last_move = last_move
+  end
+
+  def continue_game(cells)
+    @cell_count = cells.size
+    square_root = Math.sqrt(@cell_count)
+    @dimension = square_root.round
+    @cells = cells
+  end
+
+  def setup_new_game(dimension)
+    @cell_count = dimension * dimension
+    @dimension = dimension
+    @cells = create_board(@cell_count) 
   end
 
   def create_board(cell_count)
@@ -12,12 +26,8 @@ class Board
     cells
   end
 
-  def get
-    @board
-  end
-
   def mark(position, player)
-    cells = @board.dup
+    cells = @cells.dup
     cells[position] = player 
     Board.new(cells, player)
   end
@@ -31,7 +41,7 @@ class Board
   end
 
   def has_draw?
-    empty_cells = @board.find {|cell| cell == '-'}
+    empty_cells = @cells.find {|cell| cell == '-'}
     empty_cells.nil?
   end
 
@@ -40,14 +50,14 @@ class Board
   end
 
   def valid_position?(position)
-    position < @cell_count && position >= 0 && @board[position] == '-'
+    position < @cell_count && position >= 0 && @cells[position] == '-'
   end
 
   def available_positions
     i = 0
     positions = []
     while i < @cell_count do
-      positions << i if @board[i] == '-'
+      positions << i if @cells[i] == '-'
       i += 1
     end
     positions
@@ -75,8 +85,8 @@ class Board
   def left_diagonal_cells
     cells = []
     i = 0
-    while i < @size do
-      cells << @board[i * @size + i]
+    while i < @dimension do
+      cells << @cells[i * @dimension + i]
       i += 1
     end
     cells
@@ -84,16 +94,16 @@ class Board
 
   def right_diagonal_cells
     cells = []
-    i = @size
+    i = @dimension
     while i > 0 do
-      cells << @board[i * @size - i]
+      cells << @cells[i * @dimension - i]
       i -= 1
     end
     cells
   end
   
   def seperate_rows
-    rows = @board.each_slice(@size).to_a
+    rows = @cells.each_slice(@dimension).to_a
   end
 
   def contains_same(row)

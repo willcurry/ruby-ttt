@@ -15,7 +15,7 @@ RSpec.describe Game do
     @input.rewind
     @game.make_move
     @game.make_move
-    expect(@game.board[0]).to eq('x')
+    expect(@game.board.cells[0]).to eq('x')
   end
 
   it "knows if the game is over" do
@@ -30,6 +30,6 @@ RSpec.describe Game do
     @input.puts("1")
     @input.rewind
     @game.make_move
-    expect(@game.board[0]).to eq('x')
+    expect(@game.board.cells[0]).to eq('x')
   end
 end

@@ -10,9 +10,10 @@ class GameCreator
   end
 
   def create
+    board_size = @input.gets.to_i
     @game_type.display_modes(@mode_picker.find_modes)
     players = requested_mode.players
-    Game.new(Board.new, players[0], players[1])
+    Game.new(Board.new([], 'o', board_size), players[0], players[1])
   end
 
   private
