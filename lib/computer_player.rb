@@ -8,7 +8,7 @@ class ComputerPlayer
   end
 
   def next_move(board)
-    minimax(8, board, @mark)[1]
+    minimax(8, board, @mark, -1000, 1000)[1]
   end
 
   private
@@ -35,7 +35,7 @@ class ComputerPlayer
     end
   end
 
-  def minimax(depth, board, player)
+  def minimax(depth, board, player, alpha, beta)
     best_score = new_score(player)
     best_move = -1
     if board.is_over? || depth == 0
@@ -43,11 +43,17 @@ class ComputerPlayer
     end
     board.available_positions.each do |position|
       new_board = board.mark(position, player)
-      scored_move = minimax(depth - 1, new_board, player == 'x' ? 'o' : 'x')
+      scored_move = minimax(depth - 1, new_board, player == 'x' ? 'o' : 'x', alpha, beta)
       if favours_computer?(player, scored_move, best_score)
         best_score = scored_move[0]
         best_move = position
       end
+      if player == @mark
+        alpha = [alpha, best_score].max
+      else
+        beta = [beta, best_score].min
+      end
+      break if alpha >= beta
     end
     [best_score, best_move]
   end
