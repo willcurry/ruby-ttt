@@ -1,6 +1,7 @@
 class ConsoleGame
-  def initialize(output = $stdout)
+  def initialize(output = $stdout, input = $stdin)
     @output = output
+    @input = input
   end
 
   def display_board(board)
@@ -15,6 +16,10 @@ class ConsoleGame
     modes.each {|mode| print("#{mode.key}) #{mode.name}")}
   end
 
+  def ask_for_mode
+    @input.gets.to_i
+  end
+
   def game_over(board)
     display_board(board)
     board.is_won? ? print(board.winner + " has won the game!") : print("The game is a draw!")
@@ -22,6 +27,7 @@ class ConsoleGame
 
   def ask_for_board_size
     print("What board size would you like?")
+    @input.gets.to_i
   end
 
   private 
