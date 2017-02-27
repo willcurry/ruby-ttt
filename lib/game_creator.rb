@@ -1,25 +1,17 @@
-require 'mode_picker'
+require 'mode_registry'
 require 'game'
 require 'console_game'
 
 class GameCreator
-  def initialize(input = $stdin, game_type = ConsoleGame.new)
-    @input = input
-    @mode_picker = ModePicker.new(game_type)
+  def initialize(game_type = ConsoleGame.new)
+    @mode_registry = ModeRegistry.new(game_type)
     @game_type = game_type
   end
 
   def create
-    @game_type.ask_for_board_size
-    board_size = @input.gets.to_i
-    @game_type.display_modes(@mode_picker.find_modes)
+    board_size = @game_type.ask_for_board_size
+    requested_mode = @mode_registry.find(@game_type.ask_for_mode)
     players = requested_mode.players
     Game.new(Board.new([], 'o', board_size), players[0], players[1])
-  end
-
-  private
-
-  def requested_mode
-    @mode_picker.request_mode(@input.gets.to_i)
   end
 end

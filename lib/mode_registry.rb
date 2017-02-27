@@ -1,19 +1,20 @@
 require 'human_vs_human'
 require 'human_vs_computer'
 require 'computer_vs_computer'
+require 'computer_vs_human'
 require 'console_game'
 
-class ModePicker
+class ModeRegistry
   def initialize(game_type = ConsoleGame.new)
     @game_type = game_type
-    @modes = find_modes
+    @modes = ModeRegistry.all_modes
   end
 
-  def request_mode(requested_key)
-    mode = @modes.find {|mode| mode.key == requested_key}
+  def find(key)
+    mode = @modes.find {|mode| mode.key == key}
   end
 
-  def find_modes
+  def self.all_modes
     modes = []
     Modes.constants.each do |mode|
       modes << get_class(mode)
@@ -23,7 +24,7 @@ class ModePicker
   
   private
 
-  def get_class(mode)
+  def self.get_class(mode)
     Object.const_get("Modes::#{mode}").new
   end
 end

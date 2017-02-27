@@ -7,7 +7,8 @@ RSpec.describe ConsoleGame do
   before (:each) do
     @board = Board.new(['x', 'x', '-', '-', '-', '-', '-', '-', '-'])
     @output = StringIO.new
-    @console_game = ConsoleGame.new(@output)
+    @input = StringIO.new
+    @console_game = ConsoleGame.new(@output, @input)
   end
 
   it "displays board correctly" do
@@ -32,8 +33,19 @@ RSpec.describe ConsoleGame do
   end
 
   it "displays all the modes correctly" do
-    modes = [Modes::HumanVsHuman.new]
-    @console_game.display_modes(modes)
+    @console_game.ask_for_mode
     expect(@output.string).to include("1) Human VS Human")
+  end
+
+  it "returns board size when asked for it" do
+    @input.puts("1")
+    @input.rewind
+    expect(@console_game.ask_for_board_size).to eq(1)
+  end
+
+  it "returns the  mode that matches the inputted key" do
+    @input.puts("1")
+    @input.rewind
+    expect(@console_game.ask_for_mode).to eq(1)
   end
 end

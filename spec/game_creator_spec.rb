@@ -1,9 +1,12 @@
 require 'game_creator'
+require 'console_game'
 
 RSpec.describe GameCreator do
   before (:each) do
+    output = StringIO.new
     @input = StringIO.new
-    @game_creator = GameCreator.new(@input)
+    console_game = ConsoleGame.new(output, @input)
+    @game_creator = GameCreator.new(console_game)
   end
 
   it "creates a game" do

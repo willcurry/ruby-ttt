@@ -1,9 +1,11 @@
 class ConsoleGame
-  def initialize(output = $stdout)
+  def initialize(output = $stdout, input = $stdin)
     @output = output
+    @input = input
   end
 
   def display_board(board)
+    system('clear')
     board.cells.each_slice(board.dimension).to_a.each {|row| print(row.join(' ')) }
   end
 
@@ -11,8 +13,9 @@ class ConsoleGame
     print("Invalid move!")
   end
 
-  def display_modes(modes)
-    modes.each {|mode| print("#{mode.key}) #{mode.name}")}
+  def ask_for_mode
+    ModeRegistry.all_modes.each {|mode| print("#{mode.key}) #{mode.name}")}
+    @input.gets.to_i
   end
 
   def game_over(board)
@@ -22,6 +25,7 @@ class ConsoleGame
 
   def ask_for_board_size
     print("What board size would you like?")
+    @input.gets.to_i
   end
 
   private 
