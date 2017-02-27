@@ -4,9 +4,8 @@ class ConsoleGame
   end
 
   def display_board(board)
-    board.each_slice(3).to_a.each {|row| print(row.join(' ')) }
+    board.cells.each_slice(board.dimension).to_a.each {|row| print(row.join(' ')) }
   end
-
 
   def display_invalid_move
     print("Invalid move!")
@@ -17,8 +16,12 @@ class ConsoleGame
   end
 
   def game_over(board)
-    display_board(board.get)
+    display_board(board)
     board.is_won? ? print(board.winner + " has won the game!") : print("The game is a draw!")
+  end
+
+  def ask_for_board_size
+    print("What board size would you like?")
   end
 
   private 
