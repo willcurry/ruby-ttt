@@ -12,11 +12,8 @@ class ConsoleGame
     print("Invalid move!")
   end
 
-  def display_modes(modes)
-    modes.each {|mode| print("#{mode.key}) #{mode.name}")}
-  end
-
   def ask_for_mode
+    ModePicker.find_modes.each {|mode| print("#{mode.key}) #{mode.name}")}
     @input.gets.to_i
   end
 

@@ -6,14 +6,14 @@ require 'console_game'
 class ModePicker
   def initialize(game_type = ConsoleGame.new)
     @game_type = game_type
-    @modes = find_modes
+    @modes = ModePicker.find_modes
   end
 
   def request_mode(requested_key)
     mode = @modes.find {|mode| mode.key == requested_key}
   end
 
-  def find_modes
+  def self.find_modes
     modes = []
     Modes.constants.each do |mode|
       modes << get_class(mode)
@@ -23,7 +23,7 @@ class ModePicker
   
   private
 
-  def get_class(mode)
+  def self.get_class(mode)
     Object.const_get("Modes::#{mode}").new
   end
 end
