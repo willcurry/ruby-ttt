@@ -13,7 +13,7 @@ class ConsoleGame
   end
 
   def ask_for_mode
-    ModePicker.find_modes.each {|mode| print("#{mode.key}) #{mode.name}")}
+    ModeRegistry.all_modes.each {|mode| print("#{mode.key}) #{mode.name}")}
     @input.gets.to_i
   end
 
