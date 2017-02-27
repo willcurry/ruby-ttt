@@ -1,3 +1,5 @@
+require 'lines'
+
 class Board
   attr_reader :dimension
   attr_reader :cells
@@ -7,6 +9,7 @@ class Board
     @cell_count = dimension * dimension
     @cells = cells.empty? ? create_board(@cell_count) : cells
     @last_move = last_move
+    @lines = Lines.new(@cells, dimension)
   end
 
   def create_board(cell_count)
@@ -62,32 +65,12 @@ class Board
   end
 
   def any_diagonal_wins?
-    has_win?([left_diagonal_cells, right_diagonal_cells])
+    has_win?([@lines.left_diagonal_cells, @lines.right_diagonal_cells])
   end
 
   def has_win?(formation)
     win = formation.find {|formation| !formation.include?('-') && contains_same(formation)}
     !win.nil?
-  end
-
-  def left_diagonal_cells
-    cells = []
-    i = 0
-    while i < @dimension do
-      cells << @cells[i * @dimension + i]
-      i += 1
-    end
-    cells
-  end
-
-  def right_diagonal_cells
-    cells = []
-    i = @dimension
-    while i > 0 do
-      cells << @cells[i * @dimension - i]
-      i -= 1
-    end
-    cells
   end
   
   def seperate_rows
