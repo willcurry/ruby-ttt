@@ -29,7 +29,7 @@ class Board
   end
 
   def is_won?
-    any_row_wins? || any_column_wins? || any_diagonal_wins?
+    @lines.any_row_wins? || @lines.any_column_wins? || @lines.any_diagonal_wins?
   end
 
   def has_draw?
@@ -52,32 +52,5 @@ class Board
       i += 1
     end
     positions
-  end
-
-  private
-
-  def any_column_wins?
-    has_win?(seperate_rows.transpose)
-  end
-
-  def any_row_wins?
-    has_win?(seperate_rows)
-  end
-
-  def any_diagonal_wins?
-    has_win?([@lines.left_diagonal_cells, @lines.right_diagonal_cells])
-  end
-
-  def has_win?(formation)
-    win = formation.find {|formation| !formation.include?('-') && contains_same(formation)}
-    !win.nil?
-  end
-  
-  def seperate_rows
-    rows = @cells.each_slice(@dimension).to_a
-  end
-
-  def contains_same(row)
-    row.uniq.size <= 1
   end
 end
