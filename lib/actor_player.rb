@@ -9,8 +9,8 @@ class ActorPlayer
     @mark
   end
 
-  def next_move(board)
-     @input.gets.to_i
+  def input(board)
+     @input.gets
   end
 
   private

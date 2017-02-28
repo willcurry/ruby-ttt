@@ -1,6 +1,7 @@
 require 'board'
 require 'game_recording'
 require 'moves'
+require 'input_manager'
 
 class Game
   attr_reader :board
@@ -11,6 +12,7 @@ class Game
     @player_one, @player_two  = player_one, player_two
     @game_type = game_type
     @moves = Moves.new
+    @input_manager = InputManager.new(self)
   end
 
   def undo
@@ -18,8 +20,7 @@ class Game
     @board = @board.previous
   end
 
-  def make_move
-    move = @player_one.next_move(@board)
+  def make_move(move)
     return @game_type.display_invalid_move if !@board.valid_position?(move)
     @moves.add(move)
     @board = @board.mark(move, @player_one.mark)
@@ -33,7 +34,7 @@ class Game
   def start
     until is_over?
       @game_type.display_board(@board)
-      make_move
+      @input_manager.manage(@player_one.input(@board))
     end
     end_game
   end

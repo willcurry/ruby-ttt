@@ -14,7 +14,7 @@ class ConsoleGame
 
   def ask_for_mode
     ModeRegistry.all_modes.each {|mode| print("#{mode.key}) #{mode.name}")}
-    @input.gets.to_i
+    input.to_i
   end
 
   def game_over(board)
@@ -24,7 +24,11 @@ class ConsoleGame
 
   def ask_for_board_size
     print("What board size would you like?")
-    @input.gets.to_i
+    input.to_i
+  end
+
+  def input
+    @input.gets
   end
 
   private 

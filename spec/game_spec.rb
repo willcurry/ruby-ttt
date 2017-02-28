@@ -11,10 +11,8 @@ RSpec.describe Game do
   end
 
   it "knows whos turn it is" do
-    @input.puts("1\n1")
-    @input.rewind
-    @game.make_move
-    @game.make_move
+    @game.make_move(0)
+    @game.make_move(0)
     expect(@game.board.cells[0]).to eq('x')
   end
 
@@ -26,17 +24,8 @@ RSpec.describe Game do
     expect(game.is_over?).to eq(true)
   end
 
-  it "decreases the position by one" do
-    @input.puts("1")
-    @input.rewind
-    @game.make_move
-    expect(@game.board.cells[0]).to eq('x')
-  end
-
   it "can undo a round" do
-    @input.puts("1")
-    @input.rewind
-    @game.make_move
+    @game.make_move(1)
     old = @game.board
     @game.undo
     expect(@game.board).not_to eq(old)

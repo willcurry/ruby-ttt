@@ -3,7 +3,8 @@ require 'game_recording'
 RSpec.describe GameRecording do
   before (:each) do
     @output = StringIO.new
-    @game_type = ConsoleGame.new(@output)
+    @input = StringIO.new
+    @game_type = ConsoleGame.new(@output, @input)
   end
 
   it "plays the game correctly" do
