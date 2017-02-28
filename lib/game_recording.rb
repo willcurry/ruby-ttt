@@ -3,14 +3,10 @@ require 'game'
 require 'board'
 
 class GameRecording
-  def initialize(game_type = ConsoleGame.new, board_dimension = 3)
-    @moves = []
+  def initialize(game_type = ConsoleGame.new, board_dimension = 3, moves)
+    @moves = moves
     @game_type = game_type
     @board_dimension = board_dimension
-  end
-  
-  def move(position, player)
-    @moves << {:position => position, :player => player}
   end
 
   def play
@@ -31,8 +27,11 @@ class GameRecording
 
   def moves_for(player)
     moves = []
-    @moves.each do |move|
-      moves << move[:position].to_s if move[:player] == player
+    i = 0
+    while i < @moves.size
+      moves << @moves[i] if i.odd? && player == 'o'
+      moves << @moves[i] if i.even? && player == 'x'
+      i += 1
     end
     moves
   end

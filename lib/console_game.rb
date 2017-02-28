@@ -5,7 +5,6 @@ class ConsoleGame
   end
 
   def display_board(board)
-    system('clear')
     board.cells.each_slice(board.dimension).to_a.each {|row| print(row.join(' ')) }
   end
 
