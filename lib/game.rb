@@ -13,15 +13,17 @@ class Game
     @moves = Moves.new
   end
 
+  def undo
+    @moves.undo
+    @board = @board.previous
+  end
+
   def make_move
     move = @player_one.next_move(@board)
-    if @board.valid_position?(move)
-      @moves.add(move)
-      @board = @board.mark(move, @player_one.mark)
-      rotate_turns
-    else
-      @game_type.display_invalid_move
-    end
+    return @game_type.display_invalid_move if !@board.valid_position?(move)
+    @moves.add(move)
+    @board = @board.mark(move, @player_one.mark)
+    rotate_turns
   end
 
   def is_over?
@@ -40,7 +42,7 @@ class Game
 
   def end_game
     @game_type.game_over(@board)
-    @recording = GameRecording.new(@game_type, @board.dimension, @moves.get)
+    @recording = GameRecording.new(@game_type, @board.dimension, @moves)
   end
 
   def rotate_turns

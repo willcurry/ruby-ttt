@@ -18,9 +18,9 @@ class ComputerPlayer
   end
 
   def score(board, depth)
-    if board.is_won? && board.winner == @mark
+    if board.is_won? && board.last_move == @mark
       depth
-    elsif board.is_won? && board.winner != @mark
+    elsif board.is_won? && board.last_move != @mark
       -depth
     else
       0

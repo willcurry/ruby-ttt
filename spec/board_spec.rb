@@ -61,13 +61,6 @@ RSpec.describe Board do
     expect(board.is_won?).to eq(true)
   end
 
-  it "can find winner" do
-    board = Board.new(['-', '-', '-', '-', 'x', '-', 'x', '-', '-'])
-    new_board = board.mark(2, 'x')
-    expect(new_board.winner).to eq('x')
-    expect(new_board.is_won?).to eq(true)
-  end
-
   it "knows if game is not won" do
     expect(board.is_won?).to eq(false)
   end
@@ -89,5 +82,11 @@ RSpec.describe Board do
     expect(new_board.available_positions).to eq([0, 1, 2, 3, 4, 5, 6, 8])
     new_board = new_board.mark(8, 'x')
     expect(new_board.available_positions).to eq([0, 1, 2, 3, 4, 5, 6])
+  end
+
+  it "knows the previous board" do
+    new_board = board.mark(3, 'o')
+    new_board = board.mark(7, 'x')
+    expect(new_board.previous.last_move).to eq('o')
   end
 end

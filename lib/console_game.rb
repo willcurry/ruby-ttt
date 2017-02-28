@@ -19,7 +19,7 @@ class ConsoleGame
 
   def game_over(board)
     display_board(board)
-    board.is_won? ? print(board.winner + " has won the game!") : print("The game is a draw!")
+    board.is_won? ? print(board.last_move + " has won the game!") : print("The game is a draw!")
   end
 
   def ask_for_board_size

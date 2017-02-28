@@ -4,7 +4,7 @@ class Moves
   end
 
   def get
-    @moves 
+    @moves
   end
 
   def add(move)

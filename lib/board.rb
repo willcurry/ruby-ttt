@@ -3,13 +3,16 @@ require 'lines'
 class Board
   attr_reader :dimension
   attr_reader :cells
+  attr_reader :previous
+  attr_reader :last_move
 
-  def initialize(cells = [], last_move = 'o', dimension = 3)
+  def initialize(cells = [], last_move = 'o', dimension = 3, previous_board = self)
     @dimension = dimension
     @cell_count = dimension * dimension
     @cells = cells.empty? ? create_board(@cell_count) : cells
     @last_move = last_move
     @lines = Lines.new(@cells, dimension)
+    @previous = previous_board
   end
 
   def create_board(cell_count)
@@ -21,11 +24,7 @@ class Board
   def mark(position, player)
     cells = @cells.dup
     cells[position] = player 
-    Board.new(cells, player, @dimension)
-  end
-
-  def winner
-    @last_move
+    Board.new(cells, player, @dimension, self)
   end
 
   def is_won?
