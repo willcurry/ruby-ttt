@@ -32,4 +32,13 @@ RSpec.describe Game do
     @game.make_move
     expect(@game.board.cells[0]).to eq('x')
   end
+
+  it "can undo a round" do
+    @input.puts("1")
+    @input.rewind
+    @game.make_move
+    old = @game.board
+    @game.undo
+    expect(@game.board).not_to eq(old)
+  end
 end
