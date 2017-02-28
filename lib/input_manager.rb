@@ -8,15 +8,17 @@ class InputManager
 
   def manage(input)
     return @game.make_move(input.to_i) if is_move?(input)
+    return @game.undo if is_command?(input)
   end
 
   def is_move?(input)
     @board.available_positions.each do |position|
-      return true if input == position.to_s
+      return true if input.to_i == position && input.include?(position.to_s)
     end
+    false
   end
 
   def is_command?(input)
-    input == "undo"
+    input.include?("undo")
   end
 end

@@ -26,8 +26,8 @@ RSpec.describe Game do
 
   it "can undo a round" do
     @game.make_move(1)
-    old = @game.board
+    old = @game.board.cells
     @game.undo
-    expect(@game.board).not_to eq(old)
+    expect(@game.board.cells).not_to eq(old)
   end
 end
