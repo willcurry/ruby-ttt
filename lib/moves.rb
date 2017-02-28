@@ -6,4 +6,12 @@ class Moves
   def get
     @moves 
   end
+
+  def add(move)
+    @moves << move
+  end
+
+  def undo
+    @moves.pop
+  end
 end
