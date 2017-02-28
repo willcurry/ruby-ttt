@@ -1,5 +1,5 @@
 class Moves
-  def initialize(moves)
+  def initialize(moves = [])
     @moves = moves
   end
 

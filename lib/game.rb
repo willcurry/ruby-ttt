@@ -1,5 +1,6 @@
 require 'board'
 require 'game_recording'
+require 'moves'
 
 class Game
   attr_reader :board
@@ -9,13 +10,13 @@ class Game
     @board = board
     @player_one, @player_two  = player_one, player_two
     @game_type = game_type
-    @moves = []
+    @moves = Moves.new
   end
 
   def make_move
     move = @player_one.next_move(@board)
     if @board.valid_position?(move)
-      @moves << move
+      @moves.add(move)
       @board = @board.mark(move, @player_one.mark)
       rotate_turns
     else
@@ -39,7 +40,7 @@ class Game
 
   def end_game
     @game_type.game_over(@board)
-    @recording = GameRecording.new(@game_type, @board.dimension, @moves)
+    @recording = GameRecording.new(@game_type, @board.dimension, @moves.get)
   end
 
   def rotate_turns
