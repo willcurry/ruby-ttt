@@ -10,7 +10,7 @@ class ActorPlayer
   end
 
   def input(board)
-     @input.gets
+    @input.gets
   end
 
   private

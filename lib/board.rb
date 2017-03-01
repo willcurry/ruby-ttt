@@ -10,16 +10,14 @@ class Board
   def initialize(cells = [], last_move = 'o', dimension = 3, previous_board = self)
     @dimension = dimension
     @cell_count = dimension * dimension
-    @cells = cells.empty? ? create_board(@cell_count) : cells
+    @cells = cells.empty? ? create_board : cells
     @last_move = last_move
     @lines = Lines.new(@cells, dimension)
     @previous = previous_board
   end
 
-  def create_board(cell_count)
-    cells = []
-    cell_count.times {cells << '-'}
-    cells
+  def create_board
+    Array.new(@cell_count, '-')
   end
 
   def mark(position, player)
@@ -45,12 +43,6 @@ class Board
   end
 
   def available_positions
-    i = 0
-    positions = []
-    while i < @cell_count do
-      positions << i if @cells[i] == '-'
-      i += 1
-    end
-    positions
+    (0..@cell_count).select {|position| @cells[position] == '-'}
   end
 end
