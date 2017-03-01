@@ -27,11 +27,18 @@ class ConsoleGame
     input.to_i
   end
 
-  def input
-    @input.gets
+  def ask_for_game_to_replay(games)
+    print("What game would you like to rewatch?")
+    i = 1
+    games.each {|game| print("#{i}) #{game[:time]}"); i += 1}
+    input.to_i
   end
 
   private 
+
+  def input
+    @input.gets
+  end
 
   def print(string)
     @output.print(string + "\n")

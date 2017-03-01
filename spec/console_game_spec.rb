@@ -2,6 +2,7 @@ require 'console_game'
 require 'board'
 require 'game'
 require 'human_vs_human'
+require 'game_recording'
 
 RSpec.describe ConsoleGame do
   before (:each) do
@@ -47,5 +48,22 @@ RSpec.describe ConsoleGame do
     @input.puts("1")
     @input.rewind
     expect(@console_game.ask_for_mode).to eq(1)
+  end
+
+  it "returns the requested game to replay" do
+    games = [{time: Time.now, game: GameRecording.new(Moves.new)}]
+    @input.puts("1")
+    @input.rewind
+    expect(@console_game.ask_for_game_to_replay(games)).to eq(1)
+    expect(@output.string).to include("What game would you like to rewatch?")
+  end
+
+  it "displays correct game recordings" do
+    games = [{time: Time.now, game: GameRecording.new(Moves.new)}, {time: Time.now, game: GameRecording.new(Moves.new)}]
+    @input.puts("1")
+    @input.rewind
+    expect(@console_game.ask_for_game_to_replay(games)).to eq(1)
+    expect(@output.string).to include("1) #{Time.now}")
+    expect(@output.string).to include("2) #{Time.now}")
   end
 end
