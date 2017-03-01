@@ -17,7 +17,13 @@ class Game
 
   def undo
     @moves.undo
+    @undone_board = @board
     @board = @board.previous
+  end
+
+  def redo
+    @moves.redo
+    @board = @undone_board
   end
 
   def make_move(move)

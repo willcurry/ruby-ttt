@@ -30,4 +30,13 @@ RSpec.describe Game do
     @game.undo
     expect(@game.board.cells).not_to eq(old)
   end
+
+  it "can redo a round" do
+    @game.make_move(1)
+    old = @game.board.cells
+    @game.undo
+    expect(@game.board.cells).not_to eq(old)
+    @game.redo
+    expect(@game.board.cells).to eq(old)
+  end
 end

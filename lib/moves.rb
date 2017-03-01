@@ -12,6 +12,10 @@ class Moves
   end
 
   def undo
-    @moves.pop
+    @undone_move = @moves.pop
+  end
+
+  def redo
+    @moves << @undone_move
   end
 end

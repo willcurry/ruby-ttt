@@ -17,4 +17,12 @@ RSpec.describe Moves do
     moves.undo
     expect(moves.get).to eq([1, 2])
   end
+
+  it "it can redo a move" do
+    moves = Moves.new([1, 2, 3])
+    moves.undo
+    expect(moves.get).to eq([1, 2])
+    moves.redo
+    expect(moves.get).to eq([1, 2, 3])
+  end
 end
