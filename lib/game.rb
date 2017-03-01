@@ -5,7 +5,9 @@ require 'input_manager'
 
 class Game
   attr_reader :board
+  attr_writer :board
   attr_reader :recording
+  attr_reader :moves
   
   def initialize(board, player_one, player_two, game_type = ConsoleGame.new)
     @board = board
@@ -13,17 +15,6 @@ class Game
     @game_type = game_type
     @moves = Moves.new
     @input_manager = InputManager.new(self)
-  end
-
-  def undo
-    @moves.undo
-    @undone_board = @board
-    @board = @board.previous
-  end
-
-  def redo
-    @moves.redo
-    @board = @undone_board
   end
 
   def make_move(move)

@@ -23,20 +23,4 @@ RSpec.describe Game do
     game = Game.new(board, player_one, player_two)
     expect(game.is_over?).to eq(true)
   end
-
-  it "can undo a round" do
-    @game.make_move(1)
-    old = @game.board.cells
-    @game.undo
-    expect(@game.board.cells).not_to eq(old)
-  end
-
-  it "can redo a round" do
-    @game.make_move(1)
-    old = @game.board.cells
-    @game.undo
-    expect(@game.board.cells).not_to eq(old)
-    @game.redo
-    expect(@game.board.cells).to eq(old)
-  end
 end

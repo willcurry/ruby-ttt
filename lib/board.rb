@@ -4,6 +4,7 @@ class Board
   attr_reader :dimension
   attr_reader :cells
   attr_reader :previous
+  attr_reader :undone
   attr_reader :last_move
 
   def initialize(cells = [], last_move = 'o', dimension = 3, previous_board = self)

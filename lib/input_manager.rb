@@ -1,24 +1,36 @@
 require 'game'
+require 'undo'
+require 'redo'
 
 class InputManager
   def initialize(game)
     @game = game
-    @board = game.board
+    @undone_boards = []
+    @undo = Undo.new(game)
+    @redo = Redo.new(game)
   end
 
   def manage(input)
     return @game.make_move(input.to_i) if is_move?(input)
-    return @game.undo if is_command?(input)
+    if is_undo_command?(input) 
+      @undone_boards << @game.board
+      @undo.run
+    end
+    if is_redo_command?(input) 
+      @redo.give_boards(@undone_boards)
+      @redo.run
+    end
   end
 
   def is_move?(input)
-    @board.available_positions.each do |position|
-      return true if input.to_i == position && input.include?(position.to_s)
-    end
-    false
+    @game.board.available_positions.any? {|position| input.to_i == position && input.include?(position.to_s) }
   end
 
-  def is_command?(input)
+  def is_undo_command?(input)
     input.include?("undo")
+  end
+
+  def is_redo_command?(input)
+    input.include?("redo")
   end
 end
