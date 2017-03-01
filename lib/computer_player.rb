@@ -7,7 +7,7 @@ class ComputerPlayer
     @mark
   end
 
-  def next_move(board)
+  def input(board)
     minimax(8, board, @mark, -1000, 1000)[1]
   end
 
@@ -18,9 +18,9 @@ class ComputerPlayer
   end
 
   def score(board, depth)
-    if board.is_won? && board.winner == @mark
+    if board.is_won? && board.last_move == @mark
       depth
-    elsif board.is_won? && board.winner != @mark
+    elsif board.is_won? && board.last_move != @mark
       -depth
     else
       0

@@ -39,8 +39,7 @@ class Lines
   private
 
   def has_win?(line)
-    win = line.find {|line| !line.include?('-') && contains_same(line)}
-    !win.nil?
+    line.any? {|line| !line.include?('-') && contains_same(line)}
   end
 
   def seperate_rows
