@@ -12,6 +12,7 @@ class Game
   def initialize(board, player_one, player_two, game_type = ConsoleGame.new)
     @board = board
     @player_one, @player_two  = player_one, player_two
+    @active_player = @player_one
     @game_type = game_type
     @moves = Moves.new
     @input_manager = InputManager.new(self)
@@ -20,8 +21,8 @@ class Game
   def make_move(move)
     return @game_type.display_invalid_move if !@board.valid_position?(move)
     @moves.add(move)
-    @board = @board.mark(move, @player_one.mark)
-    rotate_turns
+    @board = @board.mark(move, @active_player.mark)
+    update_active_player
   end
 
   def is_over?
@@ -31,7 +32,7 @@ class Game
   def start
     until is_over?
       @game_type.display_board(@board)
-      @input_manager.manage(@player_one.input(@board))
+      @input_manager.manage(@active_player.input(@board))
     end
     end_game
   end
@@ -43,9 +44,7 @@ class Game
     @recording = GameRecording.new(@game_type, @board.dimension, @moves)
   end
 
-  def rotate_turns
-    temp = @player_one
-    @player_one = @player_two
-    @player_two = temp
+  def update_active_player
+    @active_player = @active_player == @player_one ? @player_two : @player_one
   end
 end

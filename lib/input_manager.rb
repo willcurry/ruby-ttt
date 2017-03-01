@@ -11,15 +11,9 @@ class InputManager
   end
 
   def manage(input)
-    return @game.make_move(input.to_i) if is_move?(input)
-    if is_undo_command?(input) 
-      @undone_boards << @game.board
-      @undo.run
-    end
-    if is_redo_command?(input) 
-      @redo.give_boards(@undone_boards)
-      @redo.run
-    end
+    @game.make_move(input.to_i) if is_move?(input)
+    run_undo_command if is_undo_command?(input) 
+    run_redo_command if is_redo_command?(input) 
   end
 
   def is_move?(input)
@@ -32,5 +26,17 @@ class InputManager
 
   def is_redo_command?(input)
     input.include?("redo")
+  end
+
+  private 
+
+  def run_undo_command
+    @undone_boards << @game.board
+    @undo.run
+  end
+
+  def run_redo_command
+    @redo.give_boards(@undone_boards)
+    @redo.run
   end
 end
