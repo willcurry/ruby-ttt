@@ -1,5 +1,5 @@
 class ActorPlayer
-  def initialize(mark, input = $stdin, moves_to_make)
+  def initialize(mark, input, moves_to_make)
     @mark = mark
     @input = input
     prepare_moves(moves_to_make)

@@ -27,7 +27,11 @@ class Game
   end
 
   def start
-    @game_type.start(@board, method(:end_game), @active_player)
+    @game_type.start(@board, method(:end_game), self)
+  end
+
+  def handle_input
+    @input_manager.manage(@active_player.input(@board))
   end
 
   def end_game
