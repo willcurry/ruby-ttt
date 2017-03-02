@@ -1,5 +1,3 @@
-require 'console_game'
-
 class GameCatalogue
   attr_reader :games
 

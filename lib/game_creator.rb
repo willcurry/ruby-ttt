@@ -1,6 +1,5 @@
 require 'mode_registry'
 require 'game'
-require 'console_game'
 
 class GameCreator
   def initialize(game_type)
