@@ -26,24 +26,16 @@ class Game
     update_active_player
   end
 
-  def is_over?
-    @board.is_won? || @board.has_draw?
-  end
-
   def start
-    until is_over?
-      @game_type.display_board(@board)
-      @input_manager.manage(@active_player.input(@board))
-    end
-    end_game
+    @game_type.start(@board, method(:end_game), @active_player)
   end
-
-  private
 
   def end_game
     @game_type.game_over(@board)
     @recording = GameRecording.new(@game_type, @board.dimension, @moves)
   end
+
+  private
 
   def update_active_player
     @active_player = @active_player == @player_one ? @player_two : @player_one
