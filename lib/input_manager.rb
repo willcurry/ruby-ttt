@@ -11,6 +11,7 @@ class InputManager
   end
 
   def manage(input)
+    return if input.nil?
     @game.make_move(input.to_i) if is_move?(input)
     run_undo_command if is_undo_command?(input) 
     run_redo_command if is_redo_command?(input) 

@@ -8,8 +8,9 @@ class Game
   attr_writer :board
   attr_reader :recording
   attr_reader :moves
+  attr_writer :active_player
   
-  def initialize(board, player_one, player_two, game_type = ConsoleGame.new)
+  def initialize(board, player_one, player_two, game_type)
     @board = board
     @player_one, @player_two  = player_one, player_two
     @active_player = @player_one

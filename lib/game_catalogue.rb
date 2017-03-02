@@ -3,7 +3,7 @@ require 'console_game'
 class GameCatalogue
   attr_reader :games
 
-  def initialize(game_type = ConsoleGame.new)
+  def initialize(game_type)
     @games = []
     @game_type = game_type
   end
