@@ -5,7 +5,7 @@ require 'computer_vs_human'
 require 'console_game'
 
 class ModeRegistry
-  def initialize(game_type = ConsoleGame.new)
+  def initialize(game_type)
     @game_type = game_type
     @modes = ModeRegistry.all_modes
   end

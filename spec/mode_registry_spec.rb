@@ -1,8 +1,9 @@
 require 'mode_registry'
+require 'console_game'
 
 RSpec.describe ModeRegistry do
   before (:each) do
-    @mode_registry = ModeRegistry.new
+    @mode_registry = ModeRegistry.new(ConsoleGame.new)
   end
 
   it "returns a HumanVsHuman mode if the input is 1" do

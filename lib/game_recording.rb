@@ -3,7 +3,7 @@ require 'game'
 require 'board'
 
 class GameRecording
-  def initialize(game_type = ConsoleGame.new, board_dimension = 3, moves)
+  def initialize(game_type, board_dimension = 3, moves)
     @moves = moves.get
     @game_type = game_type
     @board_dimension = board_dimension

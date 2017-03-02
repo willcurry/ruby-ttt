@@ -2,10 +2,11 @@ require 'redo'
 require 'undo'
 require 'game'
 require 'human_player'
+require 'console_game'
 
 RSpec.describe Redo do
   before (:each) do
-    @game = Game.new(Board.new, HumanPlayer.new('x'), HumanPlayer.new('o'))
+    @game = Game.new(Board.new, HumanPlayer.new('x'), HumanPlayer.new('o'), ConsoleGame.new)
     @undo = Undo.new(@game)
     @redo = Redo.new(@game)
   end

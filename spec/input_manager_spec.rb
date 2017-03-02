@@ -1,11 +1,12 @@
 require 'game'
 require 'input_manager'
 require 'board'
+require 'console_game'
 
 RSpec.describe InputManager do
   before (:each) do
     @input = StringIO.new
-    game = Game.new(Board.new, HumanPlayer.new('x', @input), HumanPlayer.new('o', @input))
+    game = Game.new(Board.new, HumanPlayer.new('x', @input), HumanPlayer.new('o', @input), ConsoleGame.new)
     @input_manager = InputManager.new(game)
   end
 

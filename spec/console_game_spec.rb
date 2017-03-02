@@ -51,7 +51,7 @@ RSpec.describe ConsoleGame do
   end
 
   it "returns the requested game to replay" do
-    games = [{time: Time.now, game: GameRecording.new(Moves.new)}]
+    games = [{time: Time.now, game: GameRecording.new(@console_game, 3, Moves.new)}]
     @input.puts("1")
     @input.rewind
     expect(@console_game.ask_for_game_to_replay(games)).to eq(1)
@@ -59,7 +59,7 @@ RSpec.describe ConsoleGame do
   end
 
   it "displays correct game recordings" do
-    games = [{time: Time.now, game: GameRecording.new(Moves.new)}, {time: Time.now, game: GameRecording.new(Moves.new)}]
+    games = [{time: Time.now, game: GameRecording.new(@console_game, 3, Moves.new)}, {time: Time.now, game: GameRecording.new(@console_game, 3, Moves.new)}]
     @input.puts("1")
     @input.rewind
     expect(@console_game.ask_for_game_to_replay(games)).to eq(1)
