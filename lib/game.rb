@@ -27,15 +27,14 @@ class Game
   end
 
   def start
-    @game_type.start(@board, self)
+    @game_type.start(self)
   end
 
   def handle_input
     @input_manager.manage(@active_player.input(@board))
   end
 
-  def end_game
-    @game_type.game_over(@board)
+  def end
     @recording = GameRecording.new(@game_type, @board.dimension, @moves)
   end
 
