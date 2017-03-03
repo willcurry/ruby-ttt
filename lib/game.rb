@@ -27,7 +27,7 @@ class Game
   end
 
   def start
-    @game_type.start(@board, method(:end_game), self)
+    @game_type.start(@board, self)
   end
 
   def handle_input
