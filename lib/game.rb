@@ -4,11 +4,10 @@ require 'moves'
 require 'input_manager'
 
 class Game
-  attr_reader :board
-  attr_writer :board
+  attr_accessor :board
   attr_reader :recording
   attr_reader :moves
-  attr_writer :active_player
+  attr_accessor :active_player
   
   def initialize(board, player_one, player_two, game_type)
     @board = board

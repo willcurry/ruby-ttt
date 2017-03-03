@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'ruby-ttt-core'
-  s.version     = '1.0.7'
+  s.version     = '1.0.8'
   s.date        = '2017-03-02'
   s.summary     = "The core for my ruby tic tac toe."
   s.description = "The core for my ruby tic tac toe."
