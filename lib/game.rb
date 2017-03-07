@@ -23,14 +23,20 @@ class Game
     @moves.add(move)
     @board = @board.mark(move, @active_player.mark)
     update_active_player
+    if @active_player.kind_of?(ComputerPlayer)
+      handle_input 
+    end
   end
 
   def start
     @game_type.start(self)
+    if @active_player.kind_of?(ComputerPlayer)
+      handle_input 
+    end
   end
 
   def handle_input
-    @input_manager.manage(@active_player.input(@board))
+    @input_manager.manage(@active_player.input(@board).to_s)
   end
 
   def end
