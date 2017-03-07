@@ -1,5 +1,5 @@
 require 'computer_vs_computer'
-if File.exist?("modes.rb") require 'modes' end
+require 'modes' if File.exist?("modes.rb") 
 
 class ModeRegistry
   def initialize(game_type)
