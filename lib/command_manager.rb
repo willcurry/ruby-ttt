@@ -2,12 +2,10 @@ require 'game'
 require 'undo'
 require 'redo'
 
-class InputManager
+class CommandManager
   def initialize(game)
     @game = game
-    @undone_boards = []
-    @undo = Undo.new(game)
-    @redo = Redo.new(game)
+    @previous_commands = []
   end
 
   def manage(input)
@@ -31,12 +29,13 @@ class InputManager
   private 
 
   def run_undo_command
-    @undone_boards << @game.board
-    @undo.run
+    undo = Undo.new(@game)
+    undo.execute
+    @previous_commands << undo
   end
 
   def run_redo_command
-    @redo.give_boards(@undone_boards)
-    @redo.run
+    redo_command = Redo.new(@game, @previous_commands)
+    redo_command.execute
   end
 end

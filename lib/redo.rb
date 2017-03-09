@@ -1,15 +1,13 @@
 class Redo 
-  def initialize(game)
+  def initialize(game, previous_commands)
     @game = game
     @moves = game.moves
+    @previous_commands = previous_commands
   end
 
-  def give_boards(boards)
-    @undone_boards = boards
-  end
-
-  def run
+  def execute
     @moves.redo
-    @game.board = @undone_boards.pop
+    last_command = @previous_commands.pop
+    @game.board = last_command.board
   end
 end

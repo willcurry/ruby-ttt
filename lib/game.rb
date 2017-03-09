@@ -1,7 +1,7 @@
 require 'board'
 require 'game_recording'
 require 'moves'
-require 'input_manager'
+require 'command_manager'
 
 class Game
   attr_accessor :board
@@ -15,7 +15,7 @@ class Game
     @active_player = @player_one
     @game_type = game_type
     @moves = Moves.new
-    @input_manager = InputManager.new(self)
+    @command_manager = CommandManager.new(self)
   end
 
   def make_move(move)
@@ -23,20 +23,20 @@ class Game
     @moves.add(move)
     @board = @board.mark(move, @active_player.mark)
     update_active_player
-    if @active_player.kind_of?(ComputerPlayer)
-      handle_input 
-    end
+    handle_input if @active_player.kind_of?(ComputerPlayer)
+  end
+
+  def is_over?
+    @board.is_won? || @board.has_draw?
   end
 
   def start
     @game_type.start(self)
-    if @active_player.kind_of?(ComputerPlayer)
-      handle_input 
-    end
+    handle_input if @active_player.kind_of?(ComputerPlayer)
   end
 
   def handle_input
-    @input_manager.manage(@active_player.input(@board).to_s)
+    @command_manager.manage(@active_player.input(@board).to_s)
   end
 
   def end
