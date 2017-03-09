@@ -9,9 +9,8 @@ class GameRecording
     @board_dimension = board_dimension
   end
 
-  def play
-    game = create_game
-    game.start
+  def get
+    create_game
   end
 
   private
