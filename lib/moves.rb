@@ -1,6 +1,7 @@
 class Moves
   def initialize(moves = [])
     @moves = moves
+    @undone_moves = []
   end
 
   def get
@@ -12,10 +13,10 @@ class Moves
   end
 
   def undo
-    @undone_move = @moves.pop
+    @undone_moves << @moves.pop
   end
 
   def redo
-    @moves << @undone_move
+    @moves << @undone_moves
   end
 end

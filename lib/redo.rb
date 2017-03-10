@@ -1,13 +1,13 @@
 class Redo 
-  def initialize(game, previous_commands)
+  def initialize(game, previous_undos)
     @game = game
     @moves = game.moves
-    @previous_commands = previous_commands
+    @previous_undos = previous_undos
   end
 
   def execute
     @moves.redo
-    last_command = @previous_commands.pop
-    @game.board = last_command.board
+    undone_command = @previous_undos.pop
+    @game.board = undone_command.undone_board
   end
 end

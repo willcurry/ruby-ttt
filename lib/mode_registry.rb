@@ -16,7 +16,7 @@ class ModeRegistry
     Modes.constants.each do |mode|
       modes << get_class(mode)
     end
-    modes
+    modes.sort_by {|mode| mode.key}
   end
   
   private

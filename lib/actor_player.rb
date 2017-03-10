@@ -10,7 +10,7 @@ class ActorPlayer
   end
 
   def input(board)
-    sleep 1
+    sleep 2
     @input.gets
   end
 

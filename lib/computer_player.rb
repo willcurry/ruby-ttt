@@ -8,6 +8,7 @@ class ComputerPlayer
   end
 
   def input(board)
+    return board.available_positions.sample if board.available_positions.size > (board.dimension * board.dimension) - board.dimension
     minimax(8, board, @mark, -1000, 1000)[1]
   end
 

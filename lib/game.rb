@@ -11,7 +11,7 @@ class Game
   
   def initialize(board, player_one, player_two, game_type)
     @board = board
-    @player_one, @player_two  = player_one, player_two
+    @player_one, @player_two = player_one, player_two
     @active_player = @player_one
     @game_type = game_type
     @moves = Moves.new
@@ -23,7 +23,8 @@ class Game
     @moves.add(move)
     @board = @board.mark(move, @active_player.mark)
     update_active_player
-    handle_input if @active_player.kind_of?(ComputerPlayer)
+    handle_input if @active_player.kind_of?(ComputerPlayer) || @active_player.kind_of?(ActorPlayer)
+    @game_type.end_game if is_over?
   end
 
   def is_over?
@@ -32,7 +33,6 @@ class Game
 
   def start
     @game_type.start(self)
-    handle_input if @active_player.kind_of?(ComputerPlayer)
   end
 
   def handle_input

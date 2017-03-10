@@ -1,14 +1,16 @@
 class Undo
-  attr_reader :board
+  attr_reader :undone_board
 
-  def initialize(game)
+  def initialize(game, move_commands)
     @game = game
     @moves = game.moves
-    @board = game.board
+    @move_commands = move_commands
   end
 
   def execute
     @moves.undo
-    @game.board = @board.previous
+    @undone_board = @game.board
+    undone_command = @move_commands.pop
+    @game.board = undone_command.board
   end
 end
